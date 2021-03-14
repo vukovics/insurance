@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import AgeStep from '../../components/AgeStep/AgeStep';
-import EmailStep from '../../components/EmailStep/EmailStep';
-import SummaryStep from '../../components/SummaryStep/SummaryStep';
+import AgeStep from '../../components/AgeStep';
+import EmailStep from '../../components/EmailStep';
+import NameStep from '../../components/NameStep';
+import SummaryStep from '../../components/SummaryStep';
 
 interface BuyflowProps {
     productId: ProductIds,
@@ -19,6 +20,7 @@ const BuyFlow: React.FC<BuyflowProps> = (props) => {
     const [currentStep, setStep] = useState('name');
 
     const [collectedData, updateData] = useState({
+        'name' : '',
         'email': '',
         'age': 0,
     });
@@ -32,7 +34,8 @@ const BuyFlow: React.FC<BuyflowProps> = (props) => {
 
     const renderCurrentStep = () => {
         switch(currentStep) {
-
+            case 'name':
+                return <NameStep cb={getStepCallback('email')} />
             case 'email':
                 return <EmailStep cb={getStepCallback('age')} />
             case 'age':
